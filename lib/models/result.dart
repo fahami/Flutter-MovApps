@@ -1,56 +1,52 @@
 class Result {
-  bool? adult;
-  String? backdropPath;
-  List<int>? genreIds;
-  int? id;
-  String? originalLanguage;
-  String? originalTitle;
-  String? overview;
-  double? popularity;
+  bool adult;
+  List<int> genreIds;
+  int id;
+  String originalLanguage;
+  String originalTitle;
+  String overview;
+  double popularity;
   String? posterPath;
-  String? releaseDate;
-  String? title;
-  bool? video;
-  double? voteAverage;
-  int? voteCount;
+  String releaseDate;
+  String title;
+  bool video;
+  double voteAverage;
+  int voteCount;
 
   Result({
-    this.adult,
-    this.backdropPath,
-    this.genreIds,
-    this.id,
-    this.originalLanguage,
-    this.originalTitle,
-    this.overview,
-    this.popularity,
+    required this.adult,
+    required this.genreIds,
+    required this.id,
+    required this.originalLanguage,
+    required this.originalTitle,
+    required this.overview,
+    required this.popularity,
     this.posterPath,
-    this.releaseDate,
-    this.title,
-    this.video,
-    this.voteAverage,
-    this.voteCount,
+    required this.releaseDate,
+    required this.title,
+    required this.video,
+    required this.voteAverage,
+    required this.voteCount,
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-        adult: json['adult'] as bool?,
-        backdropPath: json['backdrop_path'] as String?,
-        genreIds: json['genre_ids'] as List<int>?,
-        id: json['id'] as int?,
-        originalLanguage: json['original_language'] as String?,
-        originalTitle: json['original_title'] as String?,
-        overview: json['overview'] as String?,
-        popularity: json['popularity'] as double?,
-        posterPath: json['poster_path'] as String?,
-        releaseDate: json['release_date'] as String?,
-        title: json['title'] as String?,
-        video: json['video'] as bool?,
-        voteAverage: json['vote_average'] as double?,
-        voteCount: json['vote_count'] as int?,
+        adult: json["adult"],
+        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+        id: json["id"],
+        originalLanguage: json["original_language"],
+        originalTitle: json["original_title"],
+        overview: json["overview"],
+        popularity: json["popularity"].toDouble(),
+        posterPath: json["poster_path"] == null ? null : json["poster_path"],
+        releaseDate: json["release_date"] == null ? null : json["release_date"],
+        title: json["title"],
+        video: json["video"],
+        voteAverage: json["vote_average"].toDouble(),
+        voteCount: json["vote_count"],
       );
 
   Map<String, dynamic> toJson() => {
         'adult': adult,
-        'backdrop_path': backdropPath,
         'genre_ids': genreIds,
         'id': id,
         'original_language': originalLanguage,
