@@ -137,7 +137,8 @@ class Landing extends StatelessWidget {
                 SizedBox(
                   height: 300,
                   child: ChangeNotifierProvider(
-                    create: (_) => TopRatedProvider(apiServices: ApiServices()),
+                    create: (_) =>
+                        TopRatedProvider(apiServices: ApiServices(), page: 1),
                     child: Consumer<TopRatedProvider>(
                       builder: (context, topRated, child) {
                         if (topRated.state == ResultState.Loading) {

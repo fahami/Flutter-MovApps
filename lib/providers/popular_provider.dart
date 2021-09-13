@@ -28,7 +28,7 @@ class PopularProvider extends ChangeNotifier {
       if (results.results.isEmpty) {
         _state = ResultState.NoData;
         notifyListeners();
-        return _message = 'Upcoming Movie tidak ditemukan sama sekali';
+        return _message = 'Film populer tidak ditemukan sama sekali';
       } else {
         _state = ResultState.HasData;
         notifyListeners();
@@ -37,7 +37,7 @@ class PopularProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.Error;
       notifyListeners();
-      return _message = 'Pastikan anda terhubung dengan internet ya...';
+      return _message = 'Sistem error, mohon coba lagi lain waktu';
     }
   }
 }

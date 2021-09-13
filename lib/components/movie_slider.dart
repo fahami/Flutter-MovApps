@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
@@ -24,19 +25,17 @@ class MovieSlider extends StatelessWidget {
                 children: [
                   datas.posterPath == null
                       ? Icon(Icons.movie)
-                      : Image.network(
-                          'https://image.tmdb.org/t/p/w200' + datas.posterPath!,
+                      : CachedNetworkImage(
+                          imageUrl: 'https://image.tmdb.org/t/p/w200' +
+                              datas.posterPath!,
                           fit: BoxFit.cover,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) {
-                              return child;
-                            }
+                          progressIndicatorBuilder:
+                              (context, url, loadingProgress) {
                             return Center(
                               child: LinearProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes !=
-                                        null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
+                                value: loadingProgress.totalSize != null
+                                    ? loadingProgress.downloaded /
+                                        loadingProgress.totalSize!
                                     : null,
                               ),
                             );

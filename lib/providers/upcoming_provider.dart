@@ -37,7 +37,7 @@ class UpcomingProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.Error;
       notifyListeners();
-      return _message = 'Pastikan anda terhubung dengan internet ya...';
+      return _message = 'Sistem error, mohon coba lagi lain waktu';
     }
   }
 }

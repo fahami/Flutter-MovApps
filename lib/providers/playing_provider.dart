@@ -5,10 +5,10 @@ import 'package:movapps/models/results.dart';
 
 class PlayingProvider extends ChangeNotifier {
   late ApiServices apiServices;
-  int? page = 1;
+  int page = 1;
 
   PlayingProvider({required this.apiServices, required this.page}) {
-    fetchPlaying();
+    fetchPlaying(page);
   }
 
   late ResultState _state;
@@ -20,16 +20,16 @@ class PlayingProvider extends ChangeNotifier {
   late Results _nowPlaying;
   Results get result => _nowPlaying;
 
-  Future<dynamic> fetchPlaying() async {
+  Future<dynamic> fetchPlaying(int page) async {
     try {
       _state = ResultState.Loading;
       notifyListeners();
       _message = "Sedang memuat...";
-      final results = await apiServices.getNowPlaying(page ?? 1);
+      final results = await apiServices.getNowPlaying(page);
       if (results.results.isEmpty) {
         _state = ResultState.NoData;
         notifyListeners();
-        return _message = 'Upcoming Movie tidak ditemukan sama sekali';
+        return _message = 'Now Playing tidak ditemukan sama sekali';
       } else {
         _state = ResultState.HasData;
         notifyListeners();
@@ -38,7 +38,7 @@ class PlayingProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.Error;
       notifyListeners();
-      return _message = 'Pastikan anda terhubung dengan internet ya...';
+      return _message = 'Sistem error, mohon coba lagi lain waktu';
     }
   }
 }

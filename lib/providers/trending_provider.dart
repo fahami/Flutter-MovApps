@@ -5,10 +5,10 @@ import 'package:movapps/models/results.dart';
 
 class TopRatedProvider extends ChangeNotifier {
   late ApiServices apiServices;
-  int? page = 1;
+  int page = 1;
 
-  TopRatedProvider({required this.apiServices, this.page}) {
-    fetchTopRated(page ?? 1);
+  TopRatedProvider({required this.apiServices, required this.page}) {
+    fetchTopRated(page);
   }
 
   late ResultState _state;
@@ -20,16 +20,16 @@ class TopRatedProvider extends ChangeNotifier {
   late Results _topRated;
   Results get result => _topRated;
 
-  Future<dynamic> fetchTopRated(int pages) async {
+  Future<dynamic> fetchTopRated(int page) async {
     try {
       _state = ResultState.Loading;
       notifyListeners();
       _message = "Sedang memuat...";
-      final results = await apiServices.getTopRated(pages);
+      final results = await apiServices.getTopRated(page);
       if (results.results.isEmpty) {
         _state = ResultState.NoData;
         notifyListeners();
-        return _message = 'Upcoming Movie tidak ditemukan sama sekali';
+        return _message = 'Trending Movie tidak ditemukan sama sekali';
       } else {
         _state = ResultState.HasData;
         notifyListeners();
@@ -38,7 +38,7 @@ class TopRatedProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.Error;
       notifyListeners();
-      return _message = 'Pastikan anda terhubung dengan internet ya...';
+      return _message = 'Sistem error, mohon coba lagi lain waktu';
     }
   }
 }

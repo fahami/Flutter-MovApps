@@ -28,7 +28,7 @@ class SearchProvider extends ChangeNotifier {
       if (search.results.isEmpty) {
         _state = ResultState.NoData;
         notifyListeners();
-        return _message = 'Movie tidak ditemukan, gunakan kata kunci lainnya';
+        return _message = 'Film tidak ditemukan, gunakan kata kunci lainnya';
       } else {
         _state = ResultState.HasData;
         notifyListeners();
@@ -37,7 +37,7 @@ class SearchProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.Error;
       notifyListeners();
-      return _message = 'Pastikan anda terhubung dengan internet ya...';
+      return _message = 'Sistem error, mohon coba lagi lain waktu';
     }
   }
 }
